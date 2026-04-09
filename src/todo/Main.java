@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -31,7 +32,6 @@ public class Main {
         //create instance of Addtask class
         Addtask addTask = new Addtask();
         JButton addButton = addTask.getAddButton();
-
         addButton.setBounds(120, 420, 120, 30);
 
         //add action listener to the add button
@@ -59,9 +59,33 @@ public class Main {
         frame.add(scrollPane);
 
 
+    }
 
+    //method to add new tasks
+    private static void addnewTask() {
+        //create new task and add to the task panel
+        Addtask addTask = new Addtask();
+        int result = JOptionPane.showConfirmDialog(null, addTask.getPanel(), "Add New Task", JOptionPane.OK_CANCEL_OPTION);
+    
+        //if user clicks OK, add the task to the task panel
+        if (result == JOptionPane.OK_OPTION) {
+            String taskText = addTask.getTaskTextField().getText();
+            if(!taskText.isEmpty()){
+                Task newTask = new Task(taskText, taskPanel);
+                taskPanel.add(newTask.getTaskPanel());
+                //taskPanel calculates the layout and repaints to show the new task
+                taskPanel.revalidate();
+                //repaint to show the new task
+                taskPanel.repaint();
+            }
+    }
+    }
 
-
-
+    //method to clear all tasks
+    private static void clearAllTasks() {
+        //remove all tasks from task panel and repaint
+        taskPanel.removeAll();
+        taskPanel.revalidate();
+        taskPanel.repaint();
     }
 }

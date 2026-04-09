@@ -58,6 +58,9 @@ public class Main {
         frame.add(clearButton);
         frame.add(scrollPane);
 
+        frame.setVisible(true);
+        frame.setResizable(false);
+
 
     }
 
@@ -88,4 +91,6 @@ public class Main {
         taskPanel.revalidate();
         taskPanel.repaint();
     }
+
+
 }
